@@ -1,0 +1,65 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator db {
+    provider             = "prisma-client-py"
+    interface            = "sync"
+    recursive_type_depth = 5
+}
+
+enum Status {
+    AVAILABLE
+    UNAVAILABLE
+}
+
+model Account {
+    id String @id @default(cuid())
+
+    created_at DateTime @default(now())
+    email      String   @unique
+    password   String
+
+    users User[]
+    date  Date[]
+}
+
+model Date {
+    id String @id @default(cuid())
+
+    created_at DateTime @default(now())
+    date       DateTime @unique
+
+    account_id String
+    Account    Account @relation(fields: [account_id], references: [id])
+
+    attendances Attendance[]
+}
+
+model Attendance {
+    id String @id @default(cuid())
+
+    created_at DateTime @default(now())
+    status     Status
+
+    user_id String
+    User    User   @relation(fields: [user_id], references: [id])
+
+    date_id String
+    Date    Date   @relation(fields: [date_id], references: [id])
+}
+
+model User {
+    id String @id @default(cuid())
+
+    photo      String?
+    name       String
+    nim        String   @unique
+    created_at DateTime @default(now())
+
+    account_id String
+    Account    Account @relation(fields: [account_id], references: [id])
+
+    attendances Attendance[]
+}
