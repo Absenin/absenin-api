@@ -14,6 +14,16 @@ enum Status {
     UNAVAILABLE
 }
 
+model Admin {
+    id String @id @default(cuid())
+
+    created_at DateTime @default(now())
+    email      String   @unique
+    password   String
+
+    account Account[]
+}
+
 model Account {
     id String @id @default(cuid())
 
@@ -23,6 +33,9 @@ model Account {
 
     users User[]
     date  Date[]
+
+    admin_id String
+    admin    Admin  @relation(fields: [admin_id], references: [id])
 }
 
 model Date {
