@@ -48,6 +48,8 @@ model Attendance {
 
     date_id String
     Date    Date   @relation(fields: [date_id], references: [id])
+
+    ip_address String @unique
 }
 
 model User {
