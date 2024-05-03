@@ -8,8 +8,8 @@ load_dotenv()
 
 async def main():
     app = create_app()
+    print(f"Server running on http://localhost:{os.getenv('PORT')}")
     serve(app, host="0.0.0.0", port=int(os.getenv("PORT")))
-    print(f"Server running on http://localhost:")
 
 if __name__ == '__main__':
     asyncio.run(main())
