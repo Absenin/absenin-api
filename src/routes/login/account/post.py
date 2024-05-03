@@ -3,6 +3,9 @@ import os
 import jwt
 from prisma import Prisma
 import bcrypt
+from dotenv import load_dotenv
+
+load_dotenv()
 
 async def post_login_account():
     if not request.json:

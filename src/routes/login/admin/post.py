@@ -1,6 +1,9 @@
 from flask import request, jsonify, make_response, render_template
 import os
 import jwt
+from dotenv import load_dotenv
+
+load_dotenv()
 
 async def post_login_admin():
     if not request.json:

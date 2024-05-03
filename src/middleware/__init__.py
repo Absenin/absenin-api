@@ -2,6 +2,9 @@ from flask import request, jsonify
 import os
 import jwt
 from prisma import Prisma
+from dotenv import load_dotenv
+
+load_dotenv()
 
 access_route = {
     "account": ["/user"],
