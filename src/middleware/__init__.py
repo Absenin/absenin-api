@@ -11,12 +11,9 @@ access_route = {
 async def check_auth():
     if request.path == "/login/admin" or request.path == "/login/account":
         return None
-    
+            
     if not request.cookies.get("session"):
         return jsonify({"error": "Unauthorized"}), 401
-    
-    if request.headers.get("Authorization") != os.getenv("AUTH_TOKEN"):
-        return jsonify({"error": "Invalid authorization token"}), 401
     
     decoded = jwt.decode(
         jwt=request.cookies.get("session"),
@@ -27,8 +24,8 @@ async def check_auth():
     if decoded.get("role") not in access_route:
         return jsonify({"error": "Unauthorized, unknown role"}), 401
     
-    if request.path not in access_route.get(decoded.get("role")):
-        return jsonify({"error": "Unauthorized, you cant access this path"}), 401
+    if not any(route in request.path for route in access_route.get(decoded.get("role"))):
+        return jsonify({"error": "Unauthorized, invalid path"}), 401
 
     if decoded.get("role") == "account":
         db = Prisma()
