@@ -37,7 +37,8 @@ async def check_auth():
 
         account = await db.account.find_unique(
             {
-                "email": decoded.get("email")
+                "email": decoded.get("email"),
+                "id": decoded.get("id")
             }
         )
 

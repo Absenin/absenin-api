@@ -41,7 +41,8 @@ async def post_login_account():
     session = jwt.encode(
         payload={
             "role": "account",
-            "email": str(account.email)
+            "email": str(account.email),
+            "id": str(account.id)
         },
         key=os.getenv("JWT_SECRET"),
         algorithm="HS256")
