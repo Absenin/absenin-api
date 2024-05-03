@@ -14,7 +14,7 @@ async def get_account():
         accounts.append({
             "id": item.id,
             "email": item.email,
-            "createdAt": item.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "createdAt": item.created_at,
         })
 
     await db.disconnect()
