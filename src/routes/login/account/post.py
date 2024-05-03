@@ -35,14 +35,16 @@ async def post_login_account():
     if not account:
         return jsonify({"error": "Account not found"}), 404
     
-    resp = make_response()
-
-    resp.set_cookie("session", jwt.encode(
+    session = jwt.encode(
         payload={
             "role": "account",
             "email": str(account.email)
         },
         key=os.getenv("JWT_SECRET"),
-        algorithm="HS256"), httponly=True)
+        algorithm="HS256")
+    
+    resp = make_response(jsonify({"session": session}), 200)
+
+    resp.set_cookie("session", session, httponly=True)
 
     return resp
