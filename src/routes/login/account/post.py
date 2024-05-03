@@ -4,6 +4,7 @@ import jwt
 from prisma import Prisma
 import bcrypt
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -42,13 +43,15 @@ async def post_login_account():
         payload={
             "role": "account",
             "email": str(account.email),
-            "id": str(account.id)
+            "id": str(account.id),
+            "created_at": datetime.now().timestamp()
         },
         key=os.getenv("JWT_SECRET"),
-        algorithm="HS256")
+        algorithm="HS256"
+    )
     
     resp = make_response(jsonify({"session": session}), 200)
 
-    resp.set_cookie("session", session, httponly=True)
+    resp.set_cookie("session", session, httponly=True, max_age=60*60*2)
 
     return resp
