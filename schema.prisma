@@ -49,8 +49,8 @@ model Attendance {
     date_id String
     Date    Date   @relation(fields: [date_id], references: [id])
 
-    visitor_identifier String @unique
-    ip_address         String @unique
+    visitor_identifier String
+    ip_address         String
 }
 
 model User {
@@ -58,7 +58,7 @@ model User {
 
     photo      String?
     name       String
-    nim        String   @unique
+    nim        String
     created_at DateTime @default(now())
 
     account_id String
