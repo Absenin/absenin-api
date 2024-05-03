@@ -12,12 +12,12 @@ async def post_account():
     if not request.json.get("password"):
         return jsonify({"error": "Password is required"}), 400
     
-    db = Prisma()
 
     passwordBytes = str.encode(request.json.get("password"))
     salt = bcrypt.gensalt() 
     passwordHash = bcrypt.hashpw(passwordBytes, salt)
 
+    db = Prisma()
     await db.connect()
         
     await db.account.create(

@@ -24,13 +24,13 @@ async def post_login_account():
         }
     )
 
+    await db.disconnect()
+
     hashedPassword = account.password
 
     if not bcrypt.checkpw(str.encode(request.json.get("password")), str.encode(hashedPassword)):
-        await db.disconnect()
         return jsonify({"error": "Invalid password"}), 401
 
-    await db.disconnect()
     
     if not account:
         return jsonify({"error": "Account not found"}), 404

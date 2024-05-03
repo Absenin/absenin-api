@@ -2,10 +2,6 @@ from flask import jsonify, request
 from prisma import Prisma
 
 async def patch_account(id):
-    db = Prisma()
-
-    await db.connect()
-
     email = request.json.get("email")
     password = request.json.get("password")
 
@@ -16,6 +12,9 @@ async def patch_account(id):
 
     if password:
         dataToUpdate["password"] = password
+
+    db = Prisma()
+    await db.connect()
         
     data = await db.account.update(
         where={
