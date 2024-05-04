@@ -9,11 +9,6 @@ generator db {
     recursive_type_depth = 5
 }
 
-enum Status {
-    AVAILABLE
-    UNAVAILABLE
-}
-
 model Account {
     id String @id @default(cuid())
 
@@ -28,8 +23,9 @@ model Account {
 model Date {
     id String @id @default(cuid())
 
-    created_at DateTime @default(now())
-    date       DateTime @unique
+    day   Int
+    month Int
+    year  Int
 
     account_id String
     Account    Account @relation(fields: [account_id], references: [id])
@@ -41,7 +37,6 @@ model Attendance {
     id String @id @default(cuid())
 
     created_at DateTime @default(now())
-    status     Status
 
     user_id String
     User    User   @relation(fields: [user_id], references: [id])
