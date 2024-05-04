@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 access_route = {
-    "account": ["/user"],
+    "account": ["/user", "/date"],
     "admin": ["/account"]
 }
 
