@@ -26,7 +26,7 @@ async def post_user():
     
     await db.connect()
 
-    available = db.user.find_first(
+    available = await db.user.find_first(
         where={
             "nim": request.json.get("nim"),
             "account_id": decoded.get("id")
