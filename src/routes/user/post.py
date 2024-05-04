@@ -23,7 +23,19 @@ async def post_user():
     )
     
     db = Prisma()
+    
     await db.connect()
+
+    available = db.user.find_first(
+        where={
+            "nim": request.json.get("nim"),
+            "account_id": decoded.get("id")
+        }
+    )
+
+    if available:
+        await db.disconnect()
+        return jsonify({"error": "User already exists"}), 400
         
     await db.user.create(
         data={

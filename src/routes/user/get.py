@@ -31,6 +31,7 @@ async def get_user():
             "name": item.name,
             "photo": item.photo,
             "created_at": item.created_at,
+            "id": item.id,
         })
 
     await db.disconnect()
