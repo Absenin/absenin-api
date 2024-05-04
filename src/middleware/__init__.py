@@ -8,11 +8,12 @@ load_dotenv()
 
 access_route = {
     "account": ["/user", "/date"],
-    "admin": ["/account"]
+    "admin": ["/account"],
+    "public": ["/login/account", "/login/admin"]
 }
 
 async def check_auth():
-    if request.path == "/login/admin" or request.path == "/login/account":
+    if any(route in request.path for route in access_route["public"]):
         return None
             
     if not request.cookies.get("session"):
