@@ -29,7 +29,6 @@ async def get_user():
         users.append({
             "nim": item.nim,
             "name": item.name,
-            "photo": item.photo,
             "created_at": item.created_at,
             "id": item.id,
         })

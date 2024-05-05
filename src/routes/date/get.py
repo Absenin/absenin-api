@@ -62,7 +62,6 @@ async def get_date(timestamp):
             "user": {
                 "nim": item.User.nim,
                 "name": item.User.name,
-                "photo": item.User.photo
             },
             "created_at": item.created_at
         })
