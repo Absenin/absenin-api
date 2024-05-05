@@ -9,7 +9,7 @@ load_dotenv()
 access_route = {
     "account": ["/user", "/date"],
     "admin": ["/account"],
-    "public": ["/login/account", "/login/admin"]
+    "public": ["/login/account", "/login/admin", "/attendance"]
 }
 
 async def check_auth():
