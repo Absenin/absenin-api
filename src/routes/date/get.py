@@ -67,4 +67,7 @@ async def get_date(timestamp):
             "created_at": item.created_at
         })
     
-    return jsonify({"data": attendance or []}), 200
+    return jsonify({
+        "data": attendance or [],
+        "id": data.id,
+    }), 200
