@@ -8,4 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
+RUN prisma generate
+
 CMD ["python", "server.py"]
