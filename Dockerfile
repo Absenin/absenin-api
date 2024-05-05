@@ -1,5 +1,7 @@
 FROM python:3.10.12-alpine
 
+RUN apk add libstdc++6 libstdc++
+
 WORKDIR /app
 
 COPY . /app
