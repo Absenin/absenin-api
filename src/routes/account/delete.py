@@ -6,11 +6,18 @@ async def delete_account(id):
 
     await db.connect()
 
-    await db.user.delete_many(
+    userAvailable = await db.user.find_first(
         where={
             "account_id": id
         }
     )
+
+    if userAvailable:
+        await db.user.delete_many(
+            where={
+                "account_id": id
+            }
+        )
         
     data = await db.account.delete(
         where={
