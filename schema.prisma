@@ -28,7 +28,7 @@ model Date {
     year  Int
 
     account_id String
-    Account    Account @relation(fields: [account_id], references: [id])
+    Account    Account @relation(fields: [account_id], references: [id], onDelete: Cascade)
 
     attendances Attendance[]
 }
@@ -39,10 +39,10 @@ model Attendance {
     created_at DateTime @default(now())
 
     user_id String
-    User    User   @relation(fields: [user_id], references: [id])
+    User    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     date_id String
-    Date    Date   @relation(fields: [date_id], references: [id])
+    Date    Date   @relation(fields: [date_id], references: [id], onDelete: Cascade)
 
     visitor_identifier String
     ip_address         String
@@ -56,7 +56,7 @@ model User {
     created_at DateTime @default(now())
 
     account_id String
-    Account    Account @relation(fields: [account_id], references: [id])
+    Account    Account @relation(fields: [account_id], references: [id], onDelete: Cascade)
 
     attendances Attendance[]
 }
