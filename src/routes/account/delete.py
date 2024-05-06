@@ -5,11 +5,17 @@ async def delete_account(id):
     db = Prisma()
 
     await db.connect()
+
+    await db.user.delete_many(
+        where={
+            "account_id": id
+        }
+    )
         
     data = await db.account.delete(
         where={
             "id": id
-        }
+        },
     )
     
     await db.disconnect()
